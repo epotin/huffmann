@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace compressorForm
+{
+    class frequence
+    {
+        public string chaineunique;
+        public string textacompress;
+        public char[] tabCharunique = new char[0];
+        public int[] tabfrequence = new int[0];
+        public int x;
+
+        public frequence(string texcompress)
+        {
+            this.textacompress = texcompress;
+            x = 0;
+            chaineunique = "";
+            foreach (char a in textacompress)
+            {
+                if (chaineunique.Contains(a) == true)
+                {
+                    int y = chaineunique.IndexOf(a);
+                    tabfrequence[y] = tabfrequence[y] + 1;
+                }
+                else
+                {
+                    x++;
+                    Array.Resize(ref tabfrequence, x);
+                    Array.Resize(ref tabCharunique, x);
+                    chaineunique = chaineunique + a;
+                    tabfrequence[x - 1] = 1;
+                    tabCharunique[x - 1] = a;
+                }
+            }
+           
+            //classement
+            Array.Resize(ref tabfrequence, x+1);
+            Array.Resize(ref tabCharunique, x+1);
+            int v = x;
+            while (v >= 0) {
+                for (int i = 0; i < v-1; i++)
+                {
+                    if (tabfrequence[i] > tabfrequence[i + 1])
+                    {
+                        tabfrequence[x] = tabfrequence[i + 1];
+                        tabfrequence[i + 1] = tabfrequence[i];
+                        tabfrequence[i] = tabfrequence[x];
+
+                        tabCharunique[x] = tabCharunique[i + 1];
+                        tabCharunique[i + 1] = tabCharunique[i];
+                        tabCharunique[i] = tabCharunique[x];
+                    }
+                }
+               
+                v--;
+            }
+            //reconstitution de la chaine 
+            chaineunique = "";
+            for (int i = 0; i < x; i++) { chaineunique = chaineunique + tabCharunique[i]; }
+
+            Array.Resize(ref tabfrequence, x);
+            Array.Resize(ref tabCharunique, x);
+            //Array.Sort(tabfrequence);
+        }
+      
+    }
+}
