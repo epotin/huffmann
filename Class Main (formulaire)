@@ -1,0 +1,164 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace compressorForm
+{
+    public partial class Form1 : Form
+       
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //string textacompress = "abnagorrpo";
+            //string chaineunique="";
+            //int x = 0;
+            //int[] tabfrequence = new int[x];
+            //foreach (char a in textacompress)
+            //{
+            //    if (chaineunique.Contains(a) == true)
+            //    {
+            //        int y = chaineunique.IndexOf(a);
+            //        tabfrequence[y] = tabfrequence[y] + 1;
+            //    }
+            //    else
+            //    {
+            //        x++;
+            //        Array.Resize(ref tabfrequence, x);
+            //        chaineunique = chaineunique + a;
+            //        tabfrequence[x - 1] = 1;
+            //    }
+            //}
+           // MessageBox.Show(textacompress + "  ---  " + chaineunique + " frequence respectif : " + tabfrequence[0] + " " + tabfrequence[1] + " " + tabfrequence[2] + " " + tabfrequence[3] + " " + " " + tabfrequence[4] + " " + " " + tabfrequence[5] + " " + " " + tabfrequence[6] + " ");
+
+            //foreach (char b in sam)
+            //{
+            //    MessageBox.Show(" " + b);
+            //}
+            //if (sam.Contains("g")==true){
+            //    MessageBox.Show("yeessss");
+            //   MessageBox.Show(" "+sam.IndexOf("g"));
+            //   int[] tab = new int[1];
+            //   tab[0] = 10000;
+            //    Array.Resize(ref tab,3);
+            //    tab[1] = 10;
+            //    tab[2] = 100;
+            //    MessageBox.Show(" "  +tab[0]+" "  +tab[1]+" "  +tab[2]);
+               
+                    
+            //}
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+            {
+                richTextBox1.Text = "";
+                frequence f = new frequence(textBox1.Text);
+                richTextBox1.AppendText(" -------> Nombre(s) de caractère(s) différent(s):  " + f.x + System.Environment.NewLine);
+                richTextBox1.AppendText(" -------> Chaine de caractère unique :  " + f.chaineunique + System.Environment.NewLine);
+                richTextBox1.AppendText(" -------> Fréquences des caractères par ordre croissant  :  " );
+                for (int i = 0; i < f.x; i++) { richTextBox1.AppendText(" [ " + f.tabCharunique[i] + " = " + f.tabfrequence[i] + " ]"); }
+                richTextBox1.AppendText(" " + System.Environment.NewLine);
+                richTextBox1.AppendText(" -------> Création de l'arbre :  " + System.Environment.NewLine);
+                arbre[] tababre = new arbre[f.x];
+
+
+
+                //bool x = true;
+                //int index = 1;
+                //int somme = 0;
+                //string  code ="";
+                //for (int i = 0; i < f.x ; i++)
+                //{
+                //    if (i == 0)
+                //    {
+
+                //        for (int j = i; j < f.x; j++)  { code = code + "0";}
+                //    }
+                //    else
+                //    {
+                //        for (int j = i; j < f.x ; j++) { if (j == (f.x-1)) { code = code + "1"; } else { code = code + "0"; } }      
+                //    }
+
+                //    arbre a = new arbre(f.tabCharunique[i], code);
+                //    tababre[i] = a;
+                //     richTextBox1.AppendText(" ------->  "+f.tabCharunique[i] +" = "+code+ System.Environment.NewLine);
+                //     code = "";
+                //}
+                //     richTextBox1.AppendText(" -------> Compréssion du texte ...  " + System.Environment.NewLine);
+                //     richTextBox2.Text = "";
+                //     foreach (char c in textBox1.Text)
+                //     {
+                //         richTextBox2.AppendText(tababre[f.chaineunique.IndexOf(c)].codebinaire);
+                //     }
+                   int t1, t2;
+                     richTextBox1.AppendText(" ------->    Términer  " + System.Environment.NewLine);
+                     t1 = textBox1.Text.Length*8;
+                     t2 = richTextBox1.Text.Length;
+                     taille2.Text =t2+" bit(s)";
+                     taux.Text = (((t1 - t2) * 100) / t1) + " %";
+                     diff.Text=(t1 - t2) + " bit(s)";
+            }
+            else
+            {
+                MessageBox.Show("Veuillez saisir le texte a comprésser");
+          }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int v = 6;
+            int x=v+1;
+            int[] tab = new int[v+2];
+            tab[0] = 4;
+            tab[1] = 2;
+            tab[2] = 8;
+            tab[3] = 1;
+            tab[4] = 3;
+            tab[5] = 4;
+            while (v >= 0)
+            {
+                for (int i = 0; i < v - 1; i++)
+                {
+                    MessageBox.Show(" tab["+i+"] = " + tab[i] + "        tab["+(i+1)+"]= " + tab[i + 1]);
+                    if (tab[i] > tab[i + 1])
+                        tab[x] = tab[i + 1];
+                    tab[i + 1] = tab[i];
+                    tab[i] = tab[x];
+
+                    MessageBox.Show(" dedans  tab[" + i + "] = " + tab[i] + "        tab[" + (i+1) + "]= " + tab[i + 1]);
+
+                    {
+
+                    }
+                }
+
+                v--;
+            }
+            MessageBox.Show(tab[0] + " , " + tab[1] + " , " + tab[2] + " , " + tab[3] + " , " + tab[4] + " , " + tab[5] + " , ");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+           // ASCIIEncoding ascii = new ASCIIEncoding();
+           // byte bit = ascii.GetBytes("a");
+           //MessageBox.Show (" " +Convert.ToInt32 ("a"));
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            taille1.Text = (textBox1.Text.Length * 8) + " bit(s)";
+        }
+    }
+}
